@@ -1,0 +1,16 @@
+project := %CURRENT_PROJECT
+project.pkg("p").classes.toRuby.each do |c|
+
+
+cls.fields.select(By.modifier("private")).select(By.modifier(With.out("final"))).toRuby.each do |f|
+  f.rename('_' + f.name)
+end
+
+cls.fields.select(By.modifier("public")).select(By.modifier(With.out("final"))).toRuby.each do |f|
+
+  f.encapsulate
+    f.rename('_' + f.name)
+end
+
+
+end
